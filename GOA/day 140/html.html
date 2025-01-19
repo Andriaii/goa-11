@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ტაიმერი და ფანჯრის ზომა</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #message {
+      font-size: 24px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>დავალება</h1>
+
+  <!-- 1. ტაიმერი -->
+  <div id="message">loading...</div>
+
+  <!-- 2. ფონის ფერის შეცვლა -->
+  <button id="colorButton">შეცვალე ფერი</button>
+
+  <!-- 3. ფანჯრის ზომა -->
+  <div id="resizeMessage"></div>
+
+  <script>
+    // 1. ტაიმერის ლოგიკა: ლოგავს "loading..." ყოველ 1 წამში
+    setInterval(() => {
+      document.getElementById("message").textContent = "loading...";
+    }, 1000);
+
+    // 2. ღილაკი ფონის ფერის შეცვლაზე
+    const colorButton = document.getElementById("colorButton");
+    colorButton.addEventListener("click", () => {
+      // შემთხვევითი ფონის ფერის არჩევა
+      const randomColor = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+      document.body.style.backgroundColor = randomColor;
+    });
+
+    // 3. ფანჯრის ზომის დინამიური შეტყობინება
+    function updateWindowSizeMessage() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const resizeMessage = document.getElementById("resizeMessage");
+
+      if (width < height) {
+        resizeMessage.textContent = "ფანჯარა არის ვერტიკალური";
+      } else {
+        resizeMessage.textContent = "ფანჯარა არის ჰორიზონტალური";
+      }
+    }
+
+    // ადაპტირება და განახლება ფანჯრის ზომის ცვლილებაზე
+    window.addEventListener("resize", updateWindowSizeMessage);
+
+    // პირველადი გამოჩენა
+    updateWindowSizeMessage();
+  </script>
+</body>
+</html>
